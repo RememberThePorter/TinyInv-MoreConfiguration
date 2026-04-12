@@ -83,7 +83,45 @@ public class SlotUtils {
      * @return Is the given slot a regular inventory slot, that should be removed?
      */
     public static boolean isAndShouldRemoveInventorySlot(Player player, int slot) {
-        return slot < Inventory.INVENTORY_SIZE && PlayerSlots.getSlots(player) <= slot;
+        return switch(slot) {
+            case 0 -> !PlayerSlots.getSlot0(player);
+            case 1 -> !PlayerSlots.getSlot1(player);
+            case 2 -> !PlayerSlots.getSlot2(player);
+            case 3 -> !PlayerSlots.getSlot3(player);
+            case 4 -> !PlayerSlots.getSlot4(player);
+            case 5 -> !PlayerSlots.getSlot5(player);
+            case 6 -> !PlayerSlots.getSlot6(player);
+            case 7 -> !PlayerSlots.getSlot7(player);
+            case 8 -> !PlayerSlots.getSlot8(player);
+            case 9 -> !PlayerSlots.getSlot9(player);
+            case 10 -> !PlayerSlots.getSlot10(player);
+            case 11 -> !PlayerSlots.getSlot11(player);
+            case 12 -> !PlayerSlots.getSlot12(player);
+            case 13 -> !PlayerSlots.getSlot13(player);
+            case 14 -> !PlayerSlots.getSlot14(player);
+            case 15 -> !PlayerSlots.getSlot15(player);
+            case 16 -> !PlayerSlots.getSlot16(player);
+            case 17 -> !PlayerSlots.getSlot17(player);
+            case 18 -> !PlayerSlots.getSlot18(player);
+            case 19 -> !PlayerSlots.getSlot19(player);
+            case 20 -> !PlayerSlots.getSlot20(player);
+            case 21 -> !PlayerSlots.getSlot21(player);
+            case 22 -> !PlayerSlots.getSlot22(player);
+            case 23 -> !PlayerSlots.getSlot23(player);
+            case 24 -> !PlayerSlots.getSlot24(player);
+            case 25 -> !PlayerSlots.getSlot25(player);
+            case 26 -> !PlayerSlots.getSlot26(player);
+            case 27 -> !PlayerSlots.getSlot27(player);
+            case 28 -> !PlayerSlots.getSlot28(player);
+            case 29 -> !PlayerSlots.getSlot29(player);
+            case 30 -> !PlayerSlots.getSlot30(player);
+            case 31 -> !PlayerSlots.getSlot31(player);
+            case 32 -> !PlayerSlots.getSlot32(player);
+            case 33 -> !PlayerSlots.getSlot33(player);
+            case 34 -> !PlayerSlots.getSlot34(player);
+            case 35 -> !PlayerSlots.getSlot35(player);
+            default -> false;
+        };
     }
 
     /**
