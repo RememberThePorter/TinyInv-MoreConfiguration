@@ -21,7 +21,17 @@ public class PlayerSlots {
     }
     public static int getHotbarSlots(Player player){
         if (SlotUtils.shouldPlayerBeExcluded(player)) return Inventory.getSelectionSize();
-        return Math.min(getSlots(player), (int) (ServerConfig.hotbarSlots.get() + getDirectAttributeValue(player, ModAttributes.HOTBAR_SLOTS.get())));
+        int result = 0;
+        if(getSlot0(player)) result++;
+        if(getSlot1(player)) result++;
+        if(getSlot2(player)) result++;
+        if(getSlot3(player)) result++;
+        if(getSlot4(player)) result++;
+        if(getSlot5(player)) result++;
+        if(getSlot6(player)) result++;
+        if(getSlot7(player)) result++;
+        if(getSlot8(player)) result++;
+        return result;
     }
 
     public static boolean getSlot0(Player player) {

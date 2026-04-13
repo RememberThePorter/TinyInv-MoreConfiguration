@@ -15,6 +15,8 @@ import nuparu.tinyinv.config.Order;
 import nuparu.tinyinv.world.entity.player.PlayerSlots;
 import nuparu.tinyinv.world.inventory.SlotUtils;
 
+import java.util.ArrayList;
+
 public class InGameOverlayHelper {
 
     public static final int HOTBAR_SLOT_WIDTH = 20;
@@ -33,8 +35,8 @@ public class InGameOverlayHelper {
             int screenWidth = window.getGuiScaledWidth();
 
             int rows = ClientSlotUtils.getHotbarRows(window) - 1;
-            int slots = ClientSlotUtils.getHotbarSlots();
-            int slotsPerRow = ClientConfig.maxSlotsInHotbarRow.get() == 0 ? slots : Math.min(ClientConfig.maxSlotsInHotbarRow.get(), slots);
+            ArrayList<Integer> slots = ClientSlotUtils.getHotbarSlots();
+            int slotsPerRow = ClientConfig.maxSlotsInHotbarRow.get() == 0 ? slots.size() : Math.min(ClientConfig.maxSlotsInHotbarRow.get(), slots.size());
 
             Minecraft minecraft = Minecraft.getInstance();
             ItemStack itemstack = player.getOffhandItem();
@@ -93,9 +95,9 @@ public class InGameOverlayHelper {
         }
     }
 
-    private static void renderSlot(GuiGraphics guiGraphics, int p_283213_, int p_281301_, float p_281885_, Player player, ItemStack stack, int p_283261_) {
+    private static void renderSlot(GuiGraphics guiGraphics, int p_283213_, int p_281301_, float partialTicks, Player player, ItemStack stack, int p_283261_) {
         if (!stack.isEmpty()) {
-            float f = (float) stack.getPopTime() - p_281885_;
+            float f = (float) stack.getPopTime() - partialTicks;
             if (f > 0.0F) {
                 float f1 = 1.0F + f / 5.0F;
                 guiGraphics.pose().pushPose();
@@ -113,22 +115,22 @@ public class InGameOverlayHelper {
         }
     }
 
-    private static void renderHotbarGraphics(GuiGraphics guiGraphics, int hotbarStart, int hotbarEnd, int middle, int slots, int screenHeight, int slotsPerRow) {
+    private static void renderHotbarGraphics(GuiGraphics guiGraphics, int hotbarStart, int hotbarEnd, int middle, ArrayList<Integer> slots, int screenHeight, int slotsPerRow) {
         int totalSlots = 0;
         int row = 1;
         Alignment alignment = ClientConfig.hotbarAlignment.get();
-        while (totalSlots < slots) {
-            int slotsInRow = Math.min(slots - totalSlots, slotsPerRow);
+        while (totalSlots < slots.size()) {
+            int slotsInRow = Math.min(slots.size() - totalSlots, slotsPerRow);
             int left = alignment == Alignment.LEFT ? hotbarStart : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow));
             int top = screenHeight - 1 - (HOTBAR_SLOT_HEIGHT - 1) * (row);
-            renderHotbarRow(guiGraphics, totalSlots, slotsInRow, left, top);
+            renderHotbarRow(guiGraphics, slots, slotsInRow, left, top);
             totalSlots += slotsInRow;
             row++;
         }
     }
 
-    public static void renderHotbarRow(GuiGraphics guiGraphics, int from, int amount,int left, int top){
-        for (int slot = 0; slot < amount; slot++) {
+    public static void renderHotbarRow(GuiGraphics guiGraphics, ArrayList<Integer> slots, int amount,int left, int top){
+        for (int slot : slots) {
             int textureX;
             int width = HOTBAR_SLOT_WIDTH;
             if (slot == 0) {
@@ -146,35 +148,32 @@ public class InGameOverlayHelper {
         }
     }
 
-    private static int renderHotbarItems(GuiGraphics guiGraphics, int hotbarStart, int hotbarEnd, int middle, int slots, int screenHeight, int slotsPerRow, float partialTicks, Player player) {
+    private static int renderHotbarItems(GuiGraphics guiGraphics, int hotbarStart, int hotbarEnd, int middle, ArrayList<Integer> slots, int screenHeight, int slotsPerRow, float partialTicks, Player player) {
         int l = 1;
         int totalSlots = 0;
         int row = 1;
         Alignment alignment = ClientConfig.hotbarAlignment.get();
-        Order order = ClientConfig.hotbarRowOrder.get();
-        while (totalSlots < slots) {
-            int slotsInRow = Math.min(slots - totalSlots, slotsPerRow);
-            int left = alignment == Alignment.LEFT ? hotbarStart : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow));
-            int top = screenHeight - 1 - (HOTBAR_SLOT_HEIGHT - 1) * (row);
-            l += renderHotbarItemsRow(guiGraphics, order == Order.NORMAL ? totalSlots : slots - totalSlots - slotsInRow, slotsInRow, left, top, partialTicks, player);
-            totalSlots += slotsInRow;
-            row++;
-        }
+        int slotsInRow = Math.min(slots.size() - totalSlots, slotsPerRow);
+        int left = alignment == Alignment.LEFT ? hotbarStart : (alignment == Alignment.CENTER ? middle - (hotbarRowWidth(slotsInRow) / 2) : hotbarEnd - hotbarRowWidth(slotsInRow));
+        int top = screenHeight - 1 - (HOTBAR_SLOT_HEIGHT - 1) * (row);
+        l += renderHotbarItemsRow(guiGraphics, slots, left, top, partialTicks, player);
         return l;
     }
 
-    public static int renderHotbarItemsRow(GuiGraphics guiGraphics, int from, int amount,int left, int top, float partialTicks, Player player){
-        int l = 0;
-        for (int slot = 0; slot < amount; slot++) {
-            int j1 = left + 1 + slot * 20 + 2;
-            int k1 = top + 3;
-            int normalized = SlotUtils.normalizeSlotId(from + slot);
-            if(normalized == player.getInventory().selected){
-                guiGraphics.blit(Textures.WIDGETS_LOCATION, j1 - 4, k1 - 4, 0, 22, 24, 23);
+    public static int renderHotbarItemsRow(GuiGraphics guiGraphics, ArrayList<Integer> slots, int left, int top, float partialTicks, Player player) {
+        int renderedSlots = 0;
+        for (int slot = 0; slot < 9; slot++) {
+            if(slots.contains(slot)) {
+                int j1 = left + 1 + renderedSlots * 20 + 2;
+                int k1 = top + 3;
+                int normalized = SlotUtils.normalizeSlotId(slot);
+                if (normalized == player.getInventory().selected) {
+                    guiGraphics.blit(Textures.WIDGETS_LOCATION, j1 - 4, k1 - 4, 0, 22, 24, 23);
+                }
+                renderSlot(guiGraphics, j1, k1, partialTicks, player, player.getInventory().items.get(normalized), renderedSlots++);
             }
-            renderSlot(guiGraphics, j1, k1, partialTicks, player, player.getInventory().items.get(normalized), l++);
         }
-        return l;
+        return renderedSlots;
     }
 
     private static int hotbarRowWidth(int slots){
