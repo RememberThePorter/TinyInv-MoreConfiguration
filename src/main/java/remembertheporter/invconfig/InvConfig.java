@@ -13,13 +13,13 @@ import remembertheporter.invconfig.init.ModItems;
 import remembertheporter.invconfig.network.PacketManager;
 import org.slf4j.Logger;
 
-@Mod(TinyInv.MODID)
-public class TinyInv
+@Mod(InvConfig.MODID)
+public class InvConfig
 {
     public static final String MODID = "invconfig";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public TinyInv()
+    public InvConfig()
     {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigHelper.serverConfig);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ConfigHelper.clientConfig);

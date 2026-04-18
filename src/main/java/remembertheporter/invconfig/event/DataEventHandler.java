@@ -4,12 +4,12 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import remembertheporter.invconfig.TinyInv;
+import remembertheporter.invconfig.InvConfig;
 import remembertheporter.invconfig.data.attributes.AttributeDataManager;
 import remembertheporter.invconfig.network.PacketManager;
 import remembertheporter.invconfig.network.packets.SyncItemAttributeDataToClient;
 
-@Mod.EventBusSubscriber(modid = TinyInv.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = InvConfig.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DataEventHandler {
     @SubscribeEvent
     public static void addReloadListener(AddReloadListenerEvent event) {

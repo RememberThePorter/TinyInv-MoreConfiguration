@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
-import remembertheporter.invconfig.TinyInv;
+import remembertheporter.invconfig.InvConfig;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.charset.StandardCharsets;
@@ -63,7 +63,7 @@ public class AttributeDataManager extends SimpleJsonResourceReloadListener {
                         list.add(new AttributeValue(ForgeRegistries.ATTRIBUTES.getValue(attributeName), amount, operation, EquipmentSlot.byName(attributeObject.get("slot").getAsString())));
                     }
                 } catch (Exception e) {
-                    TinyInv.LOGGER.error("An error occurred while trying to load default attributes (" + key.toString() + ") :" + e.getMessage());
+                    InvConfig.LOGGER.error("An error occurred while trying to load default attributes (" + key.toString() + ") :" + e.getMessage());
                 }
             } else if (type.equals("effect")) {
                 try {
@@ -79,7 +79,7 @@ public class AttributeDataManager extends SimpleJsonResourceReloadListener {
                         list.add(new AttributeValue(ForgeRegistries.ATTRIBUTES.getValue(attributeName), amount, operation, null));
                     }
                 } catch (Exception e) {
-                    TinyInv.LOGGER.error("An error occurred while trying to load default attributes (" + key.toString() + ") :" + e.getMessage());
+                    InvConfig.LOGGER.error("An error occurred while trying to load default attributes (" + key.toString() + ") :" + e.getMessage());
                 }
             }
         }
@@ -115,7 +115,7 @@ public class AttributeDataManager extends SimpleJsonResourceReloadListener {
             Map<EquipmentSlot, Map<Attribute, List<AttributeModifier>>> result = new HashMap<>();
             groups.forEach((slot, equipmentSlotMapMap) ->
                     equipmentSlotMapMap.forEach((attribute, operationListMap) ->
-                            operationListMap.entrySet().stream().map(operationListEntry -> createModifier(operationListEntry, operation -> TinyInv.MODID + "#" + item.getDescriptionId() + "#" + slot.name() + "#" + operation.name() + "#" + attribute.getDescriptionId()))
+                            operationListMap.entrySet().stream().map(operationListEntry -> createModifier(operationListEntry, operation -> InvConfig.MODID + "#" + item.getDescriptionId() + "#" + slot.name() + "#" + operation.name() + "#" + attribute.getDescriptionId()))
                                     .forEach(optional -> optional
                                             .ifPresent(attributeModifier -> result.computeIfAbsent(slot, slot1 -> new HashMap<>())
                                                     .computeIfAbsent(attribute, attribute1 -> new ArrayList<>()).add(attributeModifier))))
@@ -130,7 +130,7 @@ public class AttributeDataManager extends SimpleJsonResourceReloadListener {
             Map<Attribute, Map<AttributeModifier.Operation, List<AttributeValue>>> groups = entry.getValue().stream().collect(Collectors.groupingBy(AttributeValue::attribute, Collectors.groupingBy(AttributeValue::operation)));
             Map<Attribute, List<AttributeModifier>> result = new HashMap<>();
             groups.forEach((attribute, operationListMap) ->
-                    operationListMap.entrySet().stream().map(operationListEntry -> createModifier(operationListEntry, operation -> TinyInv.MODID + "#" + effect.getDescriptionId() + "#" + operation.name() + "#" + attribute.getDescriptionId()))
+                    operationListMap.entrySet().stream().map(operationListEntry -> createModifier(operationListEntry, operation -> InvConfig.MODID + "#" + effect.getDescriptionId() + "#" + operation.name() + "#" + attribute.getDescriptionId()))
                             .forEach(optional -> optional
                                     .ifPresent(attributeModifier -> result.computeIfAbsent(attribute, attribute1 -> new ArrayList<>()).add(attributeModifier)))
             );

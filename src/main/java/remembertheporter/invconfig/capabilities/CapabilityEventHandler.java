@@ -7,11 +7,11 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import remembertheporter.invconfig.TinyInv;
+import remembertheporter.invconfig.InvConfig;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CapabilityEventHandler {
-    public static final ResourceLocation EXTENDED_PLAYER_KEY = new ResourceLocation(TinyInv.MODID,
+    public static final ResourceLocation EXTENDED_PLAYER_KEY = new ResourceLocation(InvConfig.MODID,
             "extended_player");
 
     @SubscribeEvent

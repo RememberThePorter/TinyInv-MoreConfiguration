@@ -10,7 +10,7 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import remembertheporter.invconfig.TinyInv;
+import remembertheporter.invconfig.InvConfig;
 import remembertheporter.invconfig.network.packets.FixClientContainerPacket;
 import remembertheporter.invconfig.network.packets.SyncItemAttributeDataToClient;
 
@@ -22,13 +22,13 @@ public class PacketManager {
     private static final String PROTOCOL_VERSION = Integer.toString(1);
 
     public static final SimpleChannel fixClientContainer = NetworkRegistry.ChannelBuilder
-            .named(new ResourceLocation(TinyInv.MODID, "fix_client_container"))
+            .named(new ResourceLocation(InvConfig.MODID, "fix_client_container"))
             .clientAcceptedVersions(PROTOCOL_VERSION::equals)
             .serverAcceptedVersions(PROTOCOL_VERSION::equals)
             .networkProtocolVersion(() -> PROTOCOL_VERSION)
             .simpleChannel();
     public static final SimpleChannel syncItemAttributeData = NetworkRegistry.ChannelBuilder
-            .named(new ResourceLocation(TinyInv.MODID, "sync_item_attribute_data"))
+            .named(new ResourceLocation(InvConfig.MODID, "sync_item_attribute_data"))
             .clientAcceptedVersions(PROTOCOL_VERSION::equals)
             .serverAcceptedVersions(PROTOCOL_VERSION::equals)
             .networkProtocolVersion(() -> PROTOCOL_VERSION)

@@ -5,10 +5,10 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import remembertheporter.invconfig.TinyInv;
+import remembertheporter.invconfig.InvConfig;
 
 public class ModAttributes {
-    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, TinyInv.MODID);
+    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, InvConfig.MODID);
     public static final RegistryObject<Attribute> SLOTS = ATTRIBUTES.register("slots", () -> new RangedAttribute("invconfig.slots",0,-64,64).setSyncable(true));
     public static final RegistryObject<Attribute> HOTBAR_SLOTS = ATTRIBUTES.register("hotbar_slots", () -> new RangedAttribute("invconfig.hotbar_slots",0,-64,64).setSyncable(true));
     public static final RegistryObject<Attribute> SLOT_0 = ATTRIBUTES.register("slot_0", () -> new RangedAttribute("invconfig.slot_0",0,-64,64).setSyncable(true));

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import remembertheporter.invconfig.TinyInv;
+import remembertheporter.invconfig.InvConfig;
 import remembertheporter.invconfig.data.attributes.AttributeDataManager;
 
 import java.util.*;
@@ -64,7 +64,7 @@ public class SyncItemAttributeDataToClient {
             Attribute attribute = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(compoundTag.getString("attribute")));
             AttributeModifier.Operation operation = AttributeModifier.Operation.valueOf(compoundTag.getString("operation"));
             double amount = compoundTag.getDouble("amount");
-            String modifierName = TinyInv.MODID + "#" + item.getDescriptionId() + "#" + slot.name() + "#" + operation.name() + "#" + attribute.getDescriptionId();
+            String modifierName = InvConfig.MODID + "#" + item.getDescriptionId() + "#" + slot.name() + "#" + operation.name() + "#" + attribute.getDescriptionId();
             UUID uuid = AttributeDataManager.stringToUUID(modifierName);
             itemModifiers.computeIfAbsent(item, i -> new HashMap<>()).computeIfAbsent(slot, s -> new HashMap<>()).computeIfAbsent(attribute, a -> new ArrayList<>()).add(new AttributeModifier(uuid, modifierName, amount, operation));
         }

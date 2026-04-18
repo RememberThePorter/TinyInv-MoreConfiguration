@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import remembertheporter.invconfig.TinyInv;
+import remembertheporter.invconfig.InvConfig;
 import remembertheporter.invconfig.capabilities.CapabilityHelper;
 import remembertheporter.invconfig.capabilities.IExtendedPlayer;
 import remembertheporter.invconfig.network.PacketManager;
@@ -14,7 +14,7 @@ import remembertheporter.invconfig.world.inventory.SlotUtils;
 
 import java.util.HashSet;
 
-@Mod.EventBusSubscriber(modid = TinyInv.MODID)
+@Mod.EventBusSubscriber(modid = InvConfig.MODID)
 public class TickHandler {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
