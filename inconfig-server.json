@@ -1,0 +1,103 @@
+
+[general]
+	#DEPRECATED - DO NOT CHANGE
+	#Range: 0 ~ 36
+	inventory_slots = 36
+	#DEPRECATED - DO NOT CHANGE
+	#Range: 0 ~ 36
+	hotbar_slots = 9
+	#Should slot index 0 be enabled?
+	slot_0 = true
+	#Should slot index 1 be enabled?
+	slot_1 = true
+	#Should slot index 2 be enabled?
+	slot_2 = true
+	#Should slot index 3 be enabled?
+	slot_3 = true
+	#Should slot index 4 be enabled?
+	slot_4 = true
+	#Should slot index 5 be enabled?
+	slot_5 = true
+	#Should slot index 6 be enabled?
+	slot_6 = true
+	#Should slot index 7 be enabled?
+	slot_7 = true
+	#Should slot index 8 be enabled?
+	slot_8 = true
+	#Should slot index 9 be enabled?
+	slot_9 = true
+	#Should slot index 10 be enabled?
+	slot_10 = true
+	#Should slot index 11 be enabled?
+	slot_11 = true
+	#Should slot index 12 be enabled?
+	slot_12 = true
+	#Should slot index 13 be enabled?
+	slot_13 = true
+	#Should slot index 14 be enabled?
+	slot_14 = true
+	#Should slot index 15 be enabled?
+	slot_15 = true
+	#Should slot index 16 be enabled?
+	slot_16 = true
+	#Should slot index 17 be enabled?
+	slot_17 = true
+	#Should slot index 18 be enabled?
+	slot_18 = true
+	#Should slot index 19 be enabled?
+	slot_19 = true
+	#Should slot index 20 be enabled?
+	slot_20 = true
+	#Should slot index 21 be enabled?
+	slot_21 = true
+	#Should slot index 22 be enabled?
+	slot_22 = true
+	#Should slot index 23 be enabled?
+	slot_23 = true
+	#Should slot index 24 be enabled?
+	slot_24 = true
+	#Should slot index 25 be enabled?
+	slot_25 = true
+	#Should slot index 26 be enabled?
+	slot_26 = true
+	#Should slot index 27 be enabled?
+	slot_27 = true
+	#Should slot index 28 be enabled?
+	slot_28 = true
+	#Should slot index 29 be enabled?
+	slot_29 = true
+	#Should slot index 30 be enabled?
+	slot_30 = true
+	#Should slot index 31 be enabled?
+	slot_31 = true
+	#Should slot index 32 be enabled?
+	slot_32 = true
+	#Should slot index 33 be enabled?
+	slot_33 = true
+	#Should slot index 34 be enabled?
+	slot_34 = true
+	#Should slot index 35 be enabled?
+	slot_35 = true
+	#Should the offhand slot be enabled?
+	offhand_slot = true
+	#Should the head armor slot be enabled?
+	head_slot = true
+	#Should the chest armor slot be enabled?
+	chest_slot = true
+	#Should the legs armor slot slot be enabled?
+	legs_slot = true
+	#Should the feet armor slot slot be enabled?
+	feet_slot = true
+	#Should the top left crafting slot be enabled?
+	crafting_top_left_slot = true
+	#Should the top right crafting slot be enabled?
+	crafting_top_right_slot = true
+	#Should the bottom left crafting slot be enabled?
+	crafting_bottom_left_slot = true
+	#Should the bottom right crafting slot be enabled?
+	crafting_bottom_right_slot = true
+	#Should exclude the players who are in creative mode?
+	exclude_creative_mode_players = true
+	#DEPRECATED - DO NOT CHANGE
+	#Allowed Values: MOJANG, INVCONFIG
+	indexing = "INVCONFIG"
